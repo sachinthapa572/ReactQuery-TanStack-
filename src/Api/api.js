@@ -23,9 +23,9 @@ const fetchUserDetails = async (id) => {
   }
 };
 
-const FetchFoodRecipes = async () => {
+const FetchFoodRecipes = async ({ limit = 10, skip = 0 }) => {
   try {
-    const response = await Dummyapi.get('/recipes');
+    const response = await Dummyapi.get(`/recipes?limit=${limit}&skip=${skip}`);
     return response.status === 200 ? response.data : [];
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Failed to fetch recipes');
@@ -34,7 +34,7 @@ const FetchFoodRecipes = async () => {
 
 const FetchIndividualFoodRecipes = async (id) => {
   try {
-    console.log(id)
+    console.log(id);
     const response = await Dummyapi.get(`/recipes/${id}`);
     return response.status === 200 ? response.data : [];
   } catch (error) {

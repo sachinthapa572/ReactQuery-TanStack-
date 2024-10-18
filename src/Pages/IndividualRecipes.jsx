@@ -1,12 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { FetchIndividualFoodRecipes } from '../Api/api';
 import IndividualRecipePlaceholderSkeleton from '../Components/skeleton/IndividualRecipePlaceholderSkeleton';
 
-
 function IndividualRecipes() {
   const { RecipeId } = useParams();
-  const navigate = useNavigate();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['recipe', RecipeId],
@@ -85,12 +83,6 @@ function IndividualRecipes() {
             <p>
               ⭐ {data.rating.toFixed(1)} / 5.0 ({data.reviewCount} reviews)
             </p>
-            <button
-              className="px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition-colors duration-200"
-              onClick={() => navigate(-1)}
-            >
-              Go Back
-            </button>
           </div>
         </div>
       )}

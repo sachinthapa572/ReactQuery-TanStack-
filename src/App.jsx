@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Polling from './Pages/Polling';
 import Recipes from './Pages/Recipes';
 import IndividualRecipes from './Pages/IndividualRecipes';
+import IniniteScroll from './Pages/IniniteScroll';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/foodRecipe/:RecipeId',
         element: <IndividualRecipes />,
+      },
+      {
+        path: 'infinitescroll',
+        element: <IniniteScroll />,
       },
     ],
   },

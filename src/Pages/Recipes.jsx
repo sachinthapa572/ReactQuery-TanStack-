@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { FetchFoodRecipes } from '../Api/api';
 import { CardDefault } from '../Components/CommonCard';
 import { Typography } from '@material-tailwind/react';
@@ -8,9 +8,13 @@ import { useState } from 'react';
 
 function Recipes() {
   const [active, setActive] = useState(1);
+  const limit = 12;
+
+  // Calculate the number of items to skip based on the active page
+  const skip = (active - 1) * limit;
 
   const next = () => {
-    if (active === totalPages) return; 
+    if (active === totalPages) return;
     setActive(active + 1);
   };
 
@@ -21,15 +25,18 @@ function Recipes() {
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['recipes', active],
-    queryFn: () => FetchFoodRecipes(active),
+    queryFn: () => FetchFoodRecipes({ limit, skip }),
     staleTime: 86400000, // Stale time (make the data fresh)
     gcTime: 86400000, // Garbage collection time (cache data)
+    placeholderData: keepPreviousData,
   });
 
-  const totalPages = data?.totalPages || 5;
+  const totalRecipes = data?.total || 0; // Total number of recipes
+  const totalPages = Math.ceil(totalRecipes / limit); // Calculate total pages
 
   return (
     <div className="mx-auto max-w-screen-xl px-6 py-10 min-h-screen bg-gray-700-50">
+      {/* Recipe Cards Grid */}
       <div className="grid grid-cols-1 gap-7 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {isLoading && (
           <>
@@ -61,7 +68,10 @@ function Recipes() {
             />
           );
         })}
+      </div>
 
+      {/* Pagination Centered Below the Grid */}
+      <div className="flex justify-center mt-8">
         <SimplePagination active={active} next={next} prev={prev} totalPages={totalPages} />
       </div>
     </div>

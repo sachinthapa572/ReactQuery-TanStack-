@@ -15,18 +15,11 @@ function NavList() {
         </NavLink>
       </Typography>
       <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-        <NavLink to="/account" className="flex items-center hover:text-blue-500 transition-colors">
-          Account
-        </NavLink>
-      </Typography>
-      <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-        <NavLink to="/blocks" className="flex items-center hover:text-blue-500 transition-colors">
-          Blocks
-        </NavLink>
-      </Typography>
-      <Typography as="li" variant="small" color="blue-gray" className="p-1 font-medium">
-        <NavLink to="/docs" className="flex items-center hover:text-blue-500 transition-colors">
-          Docs
+        <NavLink
+          to="/infinitescroll"
+          className="flex items-center hover:text-blue-500 transition-colors"
+        >
+          Infinitescroll
         </NavLink>
       </Typography>
     </ul>
