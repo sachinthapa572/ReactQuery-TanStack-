@@ -30,12 +30,14 @@ function Home() {
   }
 
   return (
-    <div>
-      <h2>User Details</h2>
-      <p>Name: {data?.name}</p>
-      <p>Email: {data?.email}</p>
-      <p>Phone: {data?.phone}</p>
-      <p>Website: {data?.website}</p>
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="max-w-lg mx-auto">
+        <h2 className="text-2xl font-bold mb-4">User Details</h2>
+        <p>Name: {data?.name}</p>
+        <p>Email: {data?.email}</p>
+        <p>Phone: {data?.phone}</p>
+        <p>Website: {data?.website}</p>
+      </div>
     </div>
   );
 }
